@@ -106,42 +106,13 @@ java -jar target/dev-pulse-0.0.1-SNAPSHOT.jar
 - [x] **Phase 1: 리포트 뷰 설계**
   - [x] `Spring Web` + `Thymeleaf` MVC 구조 설정
   - [x] Mock 데이터를 이용한 가짜 리포트 화면 구현
-- [ ] **Phase 2: 데이터 영속성 확보**
-  - [ ] `Spring Data JPA` 및 `H2` 연동
-  - [ ] 엔티티(Entity) 및 리포지토리(Repository) 설계
-  - [ ] 컨트롤러가 DB의 실제 데이터를 조회하도록 변경
-- [ ] **Phase 3: 데이터 수집 자동화**
-  - [ ] `Scheduler`를 이용한 주기적인 데이터 수집 로직 구현
-  - [ ] (GitHub API, 블로그 RSS 파싱 로직 구현)
+- [x] **Phase 2: 데이터 영속성 확보**
+  - [x] `Spring Data JPA` 및 `H2` 연동
+  - [x] 엔티티(Entity) 및 리포지토리(Repository) 설계
+  - [x] 컨트롤러가 DB의 실제 데이터를 조회하도록 변경
+- [x] **Phase 3: 데이터 수집 자동화**
+  - [x] `Scheduler`를 이용한 주기적인 데이터 수집 로직 구현
+  - [x] (GitHub API, 블로그 RSS 파싱 로직 구현)
 - [ ] **Phase 4: 아키텍처 고도화 (Kafka)**
   - [ ] 수집된 데이터를 Kafka로 전송(Produce)
   - [ ] Kafka로부터 데이터를 받아 DB에 저장(Consume)하는 Consumer 분리
-
-## License
-
-This project is licensed under the MIT License.
-
-MIT License
-
-Copyright (c) 2025 [DaeHyup]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-```
-```
