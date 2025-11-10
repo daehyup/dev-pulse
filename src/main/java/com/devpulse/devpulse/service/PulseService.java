@@ -5,7 +5,6 @@ import com.devpulse.devpulse.repository.PulseRepository;
 import jakarta.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
