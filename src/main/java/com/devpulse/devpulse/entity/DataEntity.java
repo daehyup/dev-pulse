@@ -32,5 +32,4 @@ public class DataEntity {
 
     @Column(name = "pulse_date")
     private LocalDateTime date;
-
 }

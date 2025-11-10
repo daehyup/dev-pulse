@@ -1,0 +1,25 @@
+# 1. 'version' 속성을 제거
+services:
+  # 1. Zookeeper (Confluent Inc.의 공식 이미지로 변경)
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.0.0
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  # 2. Kafka (Confluent Inc.의 공식 이미지로 변경)
+  kafka:
+    image: confluentinc/cp-kafka:7.0.0
+    ports:
+      - "9092:9092"
+    # 2. Kafka가 Zookeeper에 의존함을 명시
+    depends_on:
+      - zookeeper
+    # 3. 환경 변수 이름을 Confluent 이미지에 맞게 수정
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1

@@ -1,0 +1,50 @@
+// 1. 플러그인 설정 (Spring Boot 3.3.0, Java)
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.0'
+
+    // ❗️ [필수] 이 플러그인이 의존성의 '버전'을 관리합니다 (pom.xml의 parent 역할)
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+// 2. 기본 정보
+group = 'com.devpulse'
+version = '0.0.1-SNAPSHOT'
+
+// 3. Java 버전 설정
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+// ❗️ [필수] 이 블록이 '어디에서' 라이브러리를 다운로드할지 알려줍니다.
+repositories {
+    mavenCentral()
+}
+
+// 5. 의존성 (pom.xml의 <dependencies>와 동일)
+dependencies {
+    // Web + Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Kafka (이제 오류 없이 버전을 올바르게 찾을 것입니다)
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // JPA + H2
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.projectlombok:lombok:1.18.28'
+    runtimeOnly 'com.h2database:h2'
+
+    // Utils (Lombok은 Gradle에서 이렇게 2줄로 적습니다)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// 6. 테스트 설정
+tasks.named('test') {
+    useJUnitPlatform()
+}
