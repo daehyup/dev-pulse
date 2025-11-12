@@ -17,6 +17,7 @@ public class PulseService {
     public PulseService(RestTemplate restTemplate,
         @Value("${github.api.uri}") String githubApiUri,
         KafkaTemplate<String, String> kafkaTemplate) {
+
         this.restTemplate = restTemplate;
         this.githubApiUri = githubApiUri;
         this.kafkaTemplate = kafkaTemplate;
@@ -26,6 +27,10 @@ public class PulseService {
     @PostConstruct
     public void collectPulseData() {
         String jsonResponse = restTemplate.getForObject(githubApiUri, String.class);
+
+        System.out.println("======= GitHub API 응답 원본 =======");
+        System.out.println(jsonResponse);
+        System.out.println("===================================");
 
         kafkaTemplate.send("github-events", jsonResponse);
         System.out.println("Kafka Producer: 'github-events' 토픽으로 데이터 발송 성공!");
