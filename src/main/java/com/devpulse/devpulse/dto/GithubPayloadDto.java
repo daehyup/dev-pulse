@@ -13,6 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GithubPayloadDto {
 
-    private List<GithubCommitDto> commits;
+    private List<GithubCommitDto> commits; // GithubCommitDto 타입의 List에 담는다.
 
 }

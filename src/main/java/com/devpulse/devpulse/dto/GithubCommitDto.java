@@ -1,5 +1,6 @@
 // commits
 // 커밋 갯수 새는 클래스, '커밋 1개를 담는 최하위 설계도'
+// GithubPayloadDto안의 커밋 1개를 담을 설계도
 package com.devpulse.devpulse.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,4 +14,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GithubCommitDto {
 
+    // 개수를 세기 위한 타입 역할
 }
