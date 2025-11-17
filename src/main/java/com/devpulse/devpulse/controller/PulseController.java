@@ -20,7 +20,7 @@ public class PulseController {
 
     @GetMapping("/report") // /report라는 주소로 get방식의 요청이 들어왔을때만 실행
     public String reportMapping(Model model) {
-        List<DataEntity> dataList = pulseRepository.findAll();
+        List<DataEntity> dataList = pulseRepository.findTop30ByOrderByDateDesc();
         model.addAttribute("pulses", dataList); // dataList를 pulses이름표를 붙어서 model에 전달
         return "report";
     }
