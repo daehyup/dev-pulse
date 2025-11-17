@@ -5,13 +5,14 @@
 package com.devpulse.devpulse.service;
 
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 // @Service : 비즈니스 로직을 담당하는 두뇌이다.
-
+@Slf4j
 @Service // -> Bean 등록
 public class PulseService {
 
@@ -39,12 +40,11 @@ public class PulseService {
         String jsonResponse = restTemplate.getForObject(githubApiUri, String.class);
 
         // 디버깅용 로그
-        System.out.println("======= GitHub API 응답 원본 =======");
-        System.out.println(jsonResponse);
-        System.out.println("===================================");
+        log.info("======= GitHub API 응답 원본 =======");
+        log.info("Response: {}", jsonResponse);
 
         // kafkaTemplate 도구를 이용해서 github-events토픽으로 API응답 원본 전송
         kafkaTemplate.send("github-events", jsonResponse);
-        System.out.println("Kafka Producer: 'github-events' 토픽으로 데이터 발송 성공!");
+        log.info("Kafka Producer: 'github-events' 토픽으로 데이터 발송 성공!");
     }
 }

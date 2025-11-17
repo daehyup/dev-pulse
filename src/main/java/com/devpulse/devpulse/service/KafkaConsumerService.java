@@ -6,9 +6,11 @@ import com.devpulse.devpulse.repository.PulseRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service // -빈 등록
 public class KafkaConsumerService {
 
@@ -31,7 +33,7 @@ public class KafkaConsumerService {
             // 3개의 DTO 설계도 참고하여 자동 변환
             events = mapper.readValue(message, GithubEventDto[].class);
         } catch (JsonProcessingException e) { // 예외 발생 시
-            System.err.println("✅ Kafka Consumer: JSON 파싱 실패! " + e.getMessage());
+            log.error("✅ Kafka Consumer: JSON 파싱 실패! " + e.getMessage());
             return; // 이 메서드만 종료
         }
 
@@ -51,9 +53,9 @@ public class KafkaConsumerService {
 
             // db에 저장
             pulseRepository.save(realData);
-            System.out.println("✅ Kafka Consumer: Github 'Push 횟수' " + totalPushEvents + "건 발견 및 저장!");
+            log.info("✅ Kafka Consumer: Github 'Push 횟수' " + totalPushEvents + "건 발견 및 저장!");
         } else {
-            System.out.println("✅ Kafka Consumer: 새 Push 이벤트(커밋) 없음.");
+            log.info("✅ Kafka Consumer: 새 Push 이벤트(커밋) 없음.");
         }
     }
 }
