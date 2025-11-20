@@ -4,10 +4,10 @@
 
 package com.devpulse.devpulse.service;
 
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,19 +32,20 @@ public class PulseService {
     }
 
 //    @Scheduled(fixedRate = 3600000) -> 자동 실행(1시간마다)
-    @PostConstruct // 단 한먼 메서드 실행
+//    @PostConstruct // 단 한먼 메서드 실행
+    @Scheduled(initialDelay = 5000, fixedRate = 1800000)
     public void collectPulseData() {
-        // 주입받은 'githubApiUri' 필드(URL)를 사용하고,
-        // 주입받은 'restTemplate' 도구를 사용해서
-        // GitHub API를 호출하고, 응답 원본을 'String(문자열)'으로 받습니다.
-        String jsonResponse = restTemplate.getForObject(githubApiUri, String.class);
+            // 주입받은 'githubApiUri' 필드(URL)를 사용하고,
+            // 주입받은 'restTemplate' 도구를 사용해서
+            // GitHub API를 호출하고, 응답 원본을 'String(문자열)'으로 받습니다.
+            String jsonResponse = restTemplate.getForObject(githubApiUri, String.class);
 
-        // 디버깅용 로그
-        log.info("======= GitHub API 응답 원본 =======");
-        log.info("Response: {}", jsonResponse);
+            // 디버깅용 로그
+            log.info("======= GitHub API 응답 원본 =======");
+            log.info("Response: {}", jsonResponse);
 
-        // kafkaTemplate 도구를 이용해서 github-events토픽으로 API응답 원본 전송
-        kafkaTemplate.send("github-events", jsonResponse);
-        log.info("Kafka Producer: 'github-events' 토픽으로 데이터 발송 성공!");
-    }
+            // kafkaTemplate 도구를 이용해서 github-events토픽으로 API응답 원본 전송
+            kafkaTemplate.send("github-events", jsonResponse);
+            log.info("Kafka Producer: 'github-events' 토픽으로 데이터 발송 성공!");
+        }
 }
